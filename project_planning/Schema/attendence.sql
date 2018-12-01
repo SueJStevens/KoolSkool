@@ -1,3 +1,4 @@
+use koolskool_db;
 CREATE TABLE `attendence` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attendence_dt` date NOT NULL,

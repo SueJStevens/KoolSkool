@@ -36,4 +36,4 @@ module.exports = function(app) {
       res.json(dbPersonnel);
     });
   });
-};
+}; //end module.exports
