@@ -2,11 +2,16 @@ module.exports = function(sequelize, DataTypes) {
   var ParentChild = sequelize.define(
     "parent_child_map",
     {
-      /*************************************************************************/
+      /**************************************************************************/
       /* Relationship Definition and Usage Example:
       /  Describes the relationship between the parent record and the student; 
       /  Example:  Mother, Father, Stepparent, Grandparent.
-      /*************************************************************************/
+      /**************************************************************************/
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
       relationship: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -57,12 +62,12 @@ module.exports = function(sequelize, DataTypes) {
   ParentChild.associate = function(models) {
     models.Parents.belongsToMany(models.Students, {
       as: "children",
-      through: "parent_child_map",
+      through: {model: ParentChild, unique: false},
       foreignKey: "parent_id"
     });
     models.Students.belongsToMany(models.Parents, {
       as: "parents",
-      through: "parent_child_map",
+      through: {model: ParentChild, unique: false},
       foreignKey: "student_id"
     });
   };

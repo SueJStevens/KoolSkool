@@ -1,4 +1,6 @@
 var db = require("../models");
+// eslint-disable-next-line no-unused-vars
+var authMiddleware = require("../middleware/authMiddleware.js");
 
 module.exports = function(app) {
   // Get all examples
@@ -222,6 +224,13 @@ module.exports = function(app) {
       ]
     }).then(function(result) {
       res.json(result);
+    });
+  });
+
+  // Get users
+  app.get("/api/users", function(req, res) {
+    db.user.findAll({}).then(function(dbUser) {
+      res.json(dbUser);
     });
   });
 };

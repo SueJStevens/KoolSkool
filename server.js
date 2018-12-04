@@ -1,6 +1,16 @@
 require("dotenv").config();
+// eslint-disable-next-line no-unused-vars
+var crypto = require("crypto");
+// eslint-disable-next-line no-unused-vars
+var async = require("async");
+// eslint-disable-next-line no-unused-vars
 var express = require("express");
 var exphbs = require("express-handlebars");
+var passport = require("passport");
+var session = require("express-session");
+
+var moment = require("moment");
+moment().format();
 
 var db = require("./models");
 
@@ -15,6 +25,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 
+/*
+                _                        
+                \`*-.                    
+                 )  _`-.                 
+                .  : `. .                
+                : _   '  \               
+                ; *` _.   `*-._          
+                `-.-'          `-.       
+                  ;       `       `.     
+                  :.       .        \    
+                  . \  .   :   .-'   .   
+                  '  `+.;  ;  '      :   
+                  :  '  |    ;       ;-. 
+                  ; '   : :`-:     _.`* ;
+         [bug] .*' /  .*' ; .*`- +'  `*' 
+               `*-*   `*-*  `*-*'        
+
+               There's always a cat on your keyboard
+                       and a bug in the code
+                        The Kool Skool Team
+*/
+
+// For Passport
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 // Handlebars
 app.engine(
   "handlebars",
@@ -25,10 +64,14 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
+require("./config/passport/passport.js")(passport, db.user);
 require("./routes/apiRoutes")(app);
-require("./routes/cmsRoutes")(app);
 require("./routes/attRoutes")(app);
+require("./routes/teachersRoutes")(app);
+require("./routes/parentsRoutes")(app);
+require("./routes/authRoutes")(app, passport, db.user);
 require("./routes/htmlRoutes")(app);
+
 
 var syncOptions = { force: false };
 

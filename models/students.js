@@ -92,7 +92,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: true,
         validate: {
-          len: [1]
+          len: [1, 255]
         }
       }
     },
@@ -124,7 +124,7 @@ module.exports = function(sequelize, DataTypes) {
   );
   Students.associate = function(models) {
     Students.hasMany(models.Attendence, { as: "student_attendence" });
-    Students.hasMany(models.Course, { as: "student_courses" });
+    //Students.hasMany(models.Course, { as: "student_courses" });
   };
   return Students;
 };

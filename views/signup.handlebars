@@ -1,0 +1,73 @@
+<main>
+
+    <!--Use Bootstrap's grid system inside the main area of the page-->
+    <div class="container">
+      <!--1st row holds the logo and application name-->
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center m-0">
+            <img class="m-0" src="public/assets/images/logo1.png" alt="logo">
+              <h3>Create A New User</h3>
+          </div>
+        </div>
+      </div>
+      <!--Hidden row holds warning or alert messages-->
+      <div class="row warningMsg">
+      </div>
+      <!--2nd row holds the form-->
+      <div class="row">
+        <div class="col-12">
+          <form class="form-signin" method="POST">
+
+            <div class="form-label-group selectpicker">
+              <select id="signup-auth" name="use_mode" required data-parents_select="1" class="selectpicker" data-style="btn-outline-secondary" data-width="100%" title="Choose The New User's Authorization." >
+                <option value="student">Student</option>
+                <option value="parent">Parent</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Administrator</option>
+              </select>
+            </div>
+
+            <div class="personnel-selector">
+              <select id="personnel_select" data-personnel_id="" name="personnel_select" class="selectpicker"
+                data-live-search="true" data-style="btn-outline-secondary" data-width="100%" title="Choose The Relevant Personnel.">
+                {{!-- options go here dynamically --}}
+              </select>
+            </div>
+            <br>
+
+            <div class="form-label-group">
+              <input type="text" id="first-name" name="first-name" class="form-control outline-secondary" placeholder="First Name"
+                autocomplete="first-name" required autofocus>
+              <label for="first-name">First Name</label>
+            </div>
+
+            <div class="form-label-group">
+              <input type="text" id="last-name" name="last-name" class="form-control outline-secondary" placeholder="Last Name"
+                autocomplete="email" required autofocus>
+              <label for="last-name">Last Name</label>
+            </div>
+
+            <div class="form-label-group">
+              <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                autocomplete="new-password" required>
+              <label for="email">Email</label>
+            </div>
+
+            <div class="form-label-group">
+              <input type="password" id="input-password" name="password" class="form-control" placeholder="Password"
+                autocomplete="new-password" required>
+              <label for="input-password">Temporary Password</label>
+            </div>
+
+            <br>
+            <button id="signup-submit-btn" class="btn btn-lg btn-light btn-outline-secondary" type="submit" name="submit">Log in</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="/assets/js/userAuth.js" type="text/javascript"></script>
